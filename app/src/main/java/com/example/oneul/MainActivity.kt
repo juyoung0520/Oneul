@@ -17,7 +17,6 @@ import com.example.oneul.viewmodel.DiaryViewModel
 import com.example.oneul.viewmodel.DiaryViewModelFactory
 import com.example.oneul.viewmodel.MainViewModel
 import com.example.oneul.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainActivity : AppCompatActivity() {
 

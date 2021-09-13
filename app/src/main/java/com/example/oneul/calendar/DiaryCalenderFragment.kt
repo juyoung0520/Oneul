@@ -25,8 +25,6 @@ import com.example.oneul.databinding.FragmentDiaryCalenderBinding
 import com.example.oneul.viewmodel.DiaryViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import kotlinx.android.synthetic.main.fragment_daily_diary.view.*
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class DiaryCalenderFragment: Fragment() {
@@ -85,31 +83,13 @@ class DiaryCalenderFragment: Fragment() {
         moodList.add(context?.getDrawable(R.drawable.just)!!)
         moodList.add(context?.getDrawable(R.drawable.sad)!!)
 
-
-        // 4월
-        for (i:Int in 1..30 step(6)){
-            var new = CalendarDay.from(2021,4,i)
-            calenderdayList.add(new)
-
-            new = CalendarDay.from(2021, 4, i + 4)
-            calenderdayList.add(new)
-
-        }
-
-        // 5월
-        for (i:Int in 1..30 step(6)){
-            var new = CalendarDay.from(2021,5,i+4)
-            calenderdayList.add(new)
-            new = CalendarDay.from(2021, 5, i)
-            calenderdayList.add(new)
-        }
-
-        // 6월
-        for (i:Int in 1..15 step(3)){
-            var new = CalendarDay.from(2021,6,i)
-            calenderdayList.add(new)
-        }
-        calenderdayList.add(CalendarDay.from(2021,6,14))
+//
+//        // 6월
+//        for (i:Int in 1..15 step(3)){
+//            var new = CalendarDay.from(2021,6,i)
+//            calenderdayList.add(new)
+//        }
+//        calenderdayList.add(CalendarDay.from(2021,6,14))
 
         // 감정 + 날짜 calendar에 전달
         var i=0

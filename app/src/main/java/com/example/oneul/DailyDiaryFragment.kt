@@ -19,9 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.play.core.install.model.ActivityResult
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_daily_diary.*
-import kotlinx.android.synthetic.main.fragment_daily_diary.view.*
+
 
 class DailyDiaryFragment : Fragment() {
 
@@ -34,8 +32,7 @@ class DailyDiaryFragment : Fragment() {
         savedInstanceState: Bundle?
 
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_daily_diary, container, false)
-
+        binding = FragmentDailyDiaryBinding.inflate(layoutInflater)
         diaryViewModel = ViewModelProvider(requireActivity()).get(DiaryViewModel::class.java)
 
 //        diaryViewModel.currentDiary.observe(viewLifecycleOwner, Observer { diary ->
@@ -45,11 +42,11 @@ class DailyDiaryFragment : Fragment() {
 //            view.imageView4.setImageURI(diary.imagesUrl?.toUri())
 //        })
 
-        view.imageButton.setOnClickListener {
+        binding.imageButton.setOnClickListener {
             activity?.onBackPressed()
         }
 
-        view.imageView4.setOnClickListener() {
+        binding.imageView4.setOnClickListener() {
             var intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(intent, 1)
@@ -61,7 +58,7 @@ class DailyDiaryFragment : Fragment() {
         if(resultCode == Activity.RESULT_OK && data != null){
             if(requestCode == 1){
                 var imageUri : Uri? = data?.data
-                imageView4.setImageURI(imageUri)
+                binding.imageView4.setImageURI(imageUri)
                 diaryViewModel.currentDiary.value?.imagesUrl = imageUri.toString()
                 diaryViewModel.notifyCurrentDiary()
             }
