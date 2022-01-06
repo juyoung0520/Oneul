@@ -21,10 +21,9 @@ class AddDiaryActivity : AppCompatActivity() {
 
         binding = ActivityAddDiaryBinding.inflate(layoutInflater)
 
-        var dataformat : SimpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일")
-        var todayTime = Calendar.getInstance().time
-        var today = dataformat.format(todayTime)
-        Toast.makeText(context,today.toString(), Toast.LENGTH_SHORT).show()
+        val dataformat = SimpleDateFormat("yyyy년 MM월 dd일")
+        val todayTime = Calendar.getInstance().time
+        val today = dataformat.format(todayTime)
         binding.tvDateAdd.text = today.toString()
 
         var mood: Int?= null
@@ -45,9 +44,9 @@ class AddDiaryActivity : AppCompatActivity() {
         }
 
         binding.imageCheck.setOnClickListener {
-            val diary = Diary(date = today.toString(), mood = mood, diary = contents)
-            setResult(RESULT_OK, Intent().putExtra("diary", diary))
-            finish()
+//            val diary = Diary(date = today.toString(), mood = mood, diary = contents)
+//            setResult(RESULT_OK, Intent().putExtra("diary", diary))
+//            finish()
         }
 
         setContentView(binding.root)
