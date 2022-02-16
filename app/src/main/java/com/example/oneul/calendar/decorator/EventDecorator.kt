@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.example.oneul.MainActivity.Companion.TAG
 import com.example.oneul.R
 import com.example.oneul.config.MyContext.Companion.context
 import com.prolificinteractive.materialcalendarview.CalendarDay

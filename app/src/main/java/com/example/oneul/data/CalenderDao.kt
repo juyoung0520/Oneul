@@ -1,19 +1,19 @@
 package com.example.oneul.data
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CalenderDao {
-    @Query("SELECT * FROM calender_table")
-    fun getAllCalenders() : Flow<List<Calender>>
+    @Insert
+    fun insert(calender: Calender)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(calender: Calender)
+    @Update
+    fun update(calender: Calender)
 
-    @Query("DELETE FROM calender_table")
-    suspend fun deleteAll()
+    @Delete
+    fun delete(calender: Calender)
+
+    @Query("DELETE FROM CalendarTable")
+    fun deleteAll()
 }

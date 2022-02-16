@@ -3,10 +3,12 @@ package com.example.oneul.calendar
 //import EventDecorator
 import android.os.Build
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -17,10 +19,9 @@ import com.example.oneul.calendar.decorator.DiaryDecorator
 import com.example.oneul.calendar.decorator.EventDecorator
 import com.example.oneul.calendar.decorator.OneDayDecorator
 import com.example.oneul.databinding.FragmentScheduleCalenderBinding
-import com.example.oneul.viewmodel.MainViewModel
-import com.example.oneul.viewmodel.MainViewModelFactory
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -29,7 +30,6 @@ import kotlin.collections.HashSet
 
 class ScheduleCalenderFragment: Fragment() {
     // 일정 캘린더
-
     private lateinit var binding: FragmentScheduleCalenderBinding
     private lateinit var sCalendarView:MaterialCalendarView
 
@@ -37,7 +37,6 @@ class ScheduleCalenderFragment: Fragment() {
     private lateinit var eventDecorator: EventDecorator
 
     private lateinit var dates: HashSet<CalendarDay>
-    private lateinit var mainViewModel: MainViewModel
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -49,21 +48,11 @@ class ScheduleCalenderFragment: Fragment() {
 
         binding = FragmentScheduleCalenderBinding.inflate(layoutInflater)
 
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-        mainViewModel.currentSchedule.observe(viewLifecycleOwner, Observer {
-            val drawable = context?.getDrawable(R.drawable.schedule_task)
-            eventDecorator = drawable?.let { EventDecorator(CalendarDay.today(), it) }!!
-            sCalendarView.addDecorators(eventDecorator)
-        })
-
-
-
         // Custom Calendar
         sCalendarView = binding.scheduleCalendarView
 
         // Header
         sCalendarView.setHeaderTextAppearance(R.style.CalendarHeader)
-        var sf = SimpleDateFormat("MMMM");
 
         // WeekDays
         sCalendarView.setWeekDayTextAppearance(R.style.CalendarWeekdays)
@@ -75,14 +64,11 @@ class ScheduleCalenderFragment: Fragment() {
         oneDayDecorator = OneDayDecorator()
         sCalendarView.addDecorators(oneDayDecorator)
 
-
-
         //날짜 누르면 일정 볼 수 있게
         sCalendarView.setOnDateChangedListener { widget, date, selected ->
-            //Toast.makeText(context,date.toString(), Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_calenderFragment_to_dailyScheduleFragment)
+            val bundle = bundleOf("currentDate" to calendarDayToString(date))
+            findNavController().navigate(R.id.action_calenderFragment_to_dailyScheduleFragment, bundle)
         }
-
 
         // 운동
         var exerciseList = ArrayList<CalendarDay>()
@@ -200,8 +186,6 @@ class ScheduleCalenderFragment: Fragment() {
 
         eventDecorator = schedule_4?.let { EventDecorator(calDay_4, it) }!!
         sCalendarView.addDecorators(eventDecorator)
-
-
 
         return binding.root
     }

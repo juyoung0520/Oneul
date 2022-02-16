@@ -11,16 +11,30 @@
         android:label="MainFragment" >
         <action
             android:id="@+id/action_calenderFragment_to_dailyDiaryFragment"
-            app:destination="@id/dailyDiaryFragment" />
+            app:destination="@id/dailyDiaryFragment" >
+
+            <argument
+                android:name="currentDate"
+                app:argType="string" />
+
+        </action>
+
         <action
             android:id="@+id/action_calenderFragment_to_dailyScheduleFragment"
-            app:destination="@id/dailyScheduleFragment" />
+            app:destination="@id/dailyScheduleFragment">
+
+            <argument
+                android:name="currentDate"
+                app:argType="string" />
+
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/dailyDiaryFragment"
         android:name="com.example.oneul.DailyDiaryFragment"
         android:label="DailyDiaryFragment" />
+
     <dialog
         android:id="@+id/dailyScheduleFragment"
         android:name="com.example.oneul.DailyScheduleFragment"

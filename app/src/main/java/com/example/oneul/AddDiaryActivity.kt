@@ -44,9 +44,9 @@ class AddDiaryActivity : AppCompatActivity() {
         }
 
         binding.imageCheck.setOnClickListener {
-            val diary = Diary(date = today.toString(), mood = mood, diary = contents)
-            setResult(RESULT_OK, Intent().putExtra("diary", diary))
-            finish()
+//            val diary = Diary(date = today.toString(), mood = mood, diary = contents)
+//            setResult(RESULT_OK, Intent().putExtra("diary", diary))
+//            finish()
         }
 
         setContentView(binding.root)

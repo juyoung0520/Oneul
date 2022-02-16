@@ -30,10 +30,6 @@ import com.example.oneul.data.AppDatabase
 import com.example.oneul.data.Calender
 import com.example.oneul.data.Diary
 import com.example.oneul.databinding.FragmentMainBinding
-import com.example.oneul.viewmodel.DiaryViewModel
-import com.example.oneul.viewmodel.DiaryViewModelFactory
-import com.example.oneul.viewmodel.MainViewModel
-import com.example.oneul.viewmodel.MainViewModelFactory
 
 class MainFragment: Fragment() {
 
@@ -42,20 +38,15 @@ class MainFragment: Fragment() {
     private lateinit var scheduleCalendarFm: ScheduleCalenderFragment
     private lateinit var diaryCalendarFm: DiaryCalenderFragment
 
-    private lateinit var diaryViewModel: DiaryViewModel
-    private lateinit var mainViewModel: MainViewModel
-
     private val startForResultDiary = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
-//            val diary = result.data!!.getParcelableExtra<Diary>("diary")!!
-//            diaryViewModel.insert(diary)
-            diaryViewModel.setCurrentDiary(Diary(date = ""))
+            //diaryViewModel.setCurrentDiary(Diary(date = ""))
         }
     }
 
     private val startForResultSchedule = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
-            mainViewModel.notifyCurrententSchedule()
+            //mainViewModel.notifyCurrententSchedule()
         }
     }
 
@@ -66,16 +57,9 @@ class MainFragment: Fragment() {
     ): View? {
         binding = FragmentMainBinding.inflate(layoutInflater)
 
-        diaryViewModel = ViewModelProvider(requireActivity()).get(DiaryViewModel::class.java)
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-
         val adapter = CalenderListAdapter()
         binding.recyclerCalender.adapter = adapter
         binding.recyclerCalender.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        mainViewModel.allCalenders.observe(viewLifecycleOwner, Observer { allCalenders ->
-            allCalenders?.let { adapter.submitList(it)}
-        })
 
         binding.buttonAddDiaryMain.setOnClickListener {
             val intent= Intent(context,AddDiaryActivity::class.java)
@@ -87,11 +71,10 @@ class MainFragment: Fragment() {
             startForResultSchedule.launch(intent)
         }
 
-        // Calendar Fragment
         scheduleCalendarFm = ScheduleCalenderFragment()
         diaryCalendarFm = DiaryCalenderFragment()
 
-        childFragmentManager.beginTransaction().replace(R.id.fragment_calendar_main,scheduleCalendarFm).addToBackStack(null).commit()
+        childFragmentManager.beginTransaction().replace(R.id.fragment_calendar_main, scheduleCalendarFm).addToBackStack(null).commit()
 
 
         // 캘린더 전환
@@ -107,7 +90,6 @@ class MainFragment: Fragment() {
                 binding.buttonAddEventMain.visibility =View.VISIBLE
 
                 childFragmentManager.beginTransaction().replace(R.id.fragment_calendar_main, scheduleCalendarFm).addToBackStack(null).commit()
-
             }
         }
 
@@ -191,8 +173,6 @@ class MainFragment: Fragment() {
 
         override fun onBindViewHolder(holder: CalenderViewHolder, position: Int) {
             val view = holder.itemView
-
-            view.btn_
         }
 
         class CalenderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}

@@ -13,7 +13,6 @@ import androidx.core.app.NotificationCompat.getColor
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.res.ResourcesCompat.getColor
-import com.example.oneul.MainActivity.Companion.TAG
 import com.example.oneul.R
 import com.example.oneul.config.MyContext.Companion.context
 import com.google.android.material.color.MaterialColors.getColor
